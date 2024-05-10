@@ -2,13 +2,6 @@ let kokep = document.getElementById("kok")
 let papirkep = document.getElementById("papirk")
 let ollokep = document.getElementById("ollok")
 
-let kok = false
-let pa = false
-let ol = false
-
-let gepkok = false
-let geppa = false
-let gepol = false
 
 let enpont=0
 let geppont=0
@@ -17,83 +10,81 @@ function ko(){
     kokep.style.border = "thick solid red"
     papirkep.style.border = ""
     ollokep.style.border = ""
-    kok=true
-    pa=false
-    ol=false
-    
+    gep("ko")
 }
 function papir(){
     papirkep.style.border = "thick solid red"
     kokep.style.border = ""
     ollokep.style.border = ""
-    kok=false
-    pa=true
-    ol=false
+    gep("papir")
 }
 function ollo(){
     ollokep.style.border = "thick solid red"
     kokep.style.border = ""
     papirkep.style.border = ""
-    kok=false
-    pa=false
-    ol=true
+    gep("ollo")
 }
 
-function gep(){
-    gepkok=false
-    geppa=false
-    gepol=false
+function gep(valasztas){
     let keph=document.getElementById("kepimg")
+    let eredmenyelem = document.getElementById("eredmeny")
     let gepval=Math.floor(Math.random() * 3);
+    gepko=false
+    geppapir=false
+    gepollo=false
+
+
     if(gepval==0){
 
         keph.src="ko.png"
-        gepkok=true
-        if(ol==true){
-            geppont+=1
-        }
-        else if(pa=true){
-            enpont+=1
-        }
-        else{
-
-        }
-        
+        gepko=true
     }
     else if(gepval==1){
 
         keph.src="ollo.png"
-        geppa=true
-        if(kok==true){
-            enpontpont+=1
-        }
-        else if(pa=true){
-            geppont+=1
-        }
-        else{
-            
-        }
+        gepollo=true
     }
     else if(gepval==2){
 
         keph.src="papir.png"
-        gepol=true
-        if(kok==true){
-            geppont+=1
-        }
-        else if(ol=true){
-            enpont+=1
-        }
-        else{
-            
-        }
+        geppapir=true
     }
+
+    if (valasztas == "ko" && gepko) {
+        eredmenyelem.innerHTML = "Eredmeny: dontetlen"
+    } else if (valasztas == "ko" && geppapir) {
+        eredmenyelem.innerHTML = "Eredmeny: vesztettel"
+        geppont++
+    } else if (valasztas == "ko" && gepollo) {
+        eredmenyelem.innerHTML = "Eredmeny: nyertel"
+        enpont++
+    }
+ 
+    if (valasztas == "papir" && geppapir) {
+        eredmenyelem.innerHTML = "Eredmeny: dontetlen"
+    } else if (valasztas == "papir" && gepollo) {
+        eredmenyelem.innerHTML = "Eredmeny: vesztettel"
+        geppont++
+    } else if (valasztas == "papir" && gepko) {
+        eredmenyelem.innerHTML = "Eredmeny: nyertel"
+        enpont++
+    }
+ 
+    if (valasztas == "ollo" && gepollo) {
+        eredmenyelem.innerHTML = "Eredmeny: dontetlen"
+    } else if (valasztas == "ollo" && gepko) {
+        eredmenyelem.innerHTML = "Eredmeny: vesztettel"
+        geppont++
+    } else if (valasztas == "ollo" && geppapir) {
+        eredmenyelem.innerHTML = "Eredmeny: nyertel"
+        enpont++
+    }
+
     let enp=document.getElementById("enpontok")
     let gepp=document.getElementById("geppontok")
 
-    enp.appendChild(enpont)
-    gepp.appendChild(geppont)
-    
+    enp.innerHTML = enpont
+    gepp.innerHTML = geppont
 
 }
 
