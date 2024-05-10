@@ -7,3 +7,15 @@ table{
     
     margin: 0 auto;
 }
+
+body{
+    color: rgb(2, 165, 2);
+}
+
+#enpontok{
+    color: red;
+}
+
+#geppontok{
+    color: red;
+}
